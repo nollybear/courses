@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Book Reviews</title>
+    </head>
+    <body>
+
+            <h1>{{book.title|title}}</h1>
+            <h2>Author: {{book.author}}
+            <a href="/books">Go Back Home</a>
+            <a href="/logout">Logout</a>
+        <h3>Reviews</h3>
+            {% for review in reviews %}
+                <p><strong>{{review.user.first_name}} says:</strong> {{review.review}}</p>
+                <p>And gave it {{review.rating}} stars
+                <hr>
+            {% endfor %}
+            <h3>Leave a Review</h3>
+            <form action="/addreview/{{book.id}}" method="post">
+                {% csrf_token %}
+                Review: <input type="text" name="review"></br>
+                Rating: <input type="text" name="rating"></br>
+                <input type="submit" value="Submit">
+            </form>
+    </body>
+</html>
